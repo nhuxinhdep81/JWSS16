@@ -1,0 +1,70 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'com.tien'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '5.11.0'
+    springVersion = '6.1.2'
+    hibernateValidatorVersion = '8.0.1.Final'
+}
+
+sourceCompatibility = '21'
+targetCompatibility = '21'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters'
+}
+
+dependencies {
+    compileOnly 'jakarta.servlet:jakarta.servlet-api:6.1.0'
+
+    implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0'
+    implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.0'
+
+    // MySQL Connector
+    implementation 'mysql:mysql-connector-java:8.0.33'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.32'
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
+
+    // Spring dependencies
+    implementation "org.springframework:spring-core:${springVersion}"
+    implementation "org.springframework:spring-web:${springVersion}"
+    implementation "org.springframework:spring-webmvc:${springVersion}"
+
+    // Validation
+    implementation 'jakarta.validation:jakarta.validation-api:3.1.0'
+    implementation "org.hibernate.validator:hibernate-validator:${hibernateValidatorVersion}"
+
+    // Thymeleaf
+    implementation 'org.thymeleaf:thymeleaf-spring6:3.1.2.RELEASE'
+
+    // Logging
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    implementation 'ch.qos.logback:logback-classic:1.4.11'
+
+    // Upload file (thêm commons-fileupload)
+    implementation 'commons-fileupload:commons-fileupload:1.5'
+    implementation 'commons-io:commons-io:2.11.0'
+
+    // Cloudinary
+    implementation 'com.cloudinary:cloudinary-http44:1.38.0' // Nâng cấp lên phiên bản mới hơn
+
+    // JUnit for testing
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+}
+
+test {
+    useJUnitPlatform()
+}

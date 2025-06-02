@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thêm Chuyến Xe</title>
+</head>
+<body>
+<h2>Thêm Chuyến Xe Mới</h2>
+<form th:action="@{/admin/trips/add}" th:object="${trip}" method="post">
+    <div>
+        <label>Điểm Khởi Hành:</label>
+        <input type="text" th:field="*{departurePoint}" />
+        <span th:if="${#fields.hasErrors('departurePoint')}" th:errors="*{departurePoint}"></span>
+    </div>
+    <div>
+        <label>Điểm Đến:</label>
+        <input type="text" th:field="*{destination}" />
+        <span th:if="${#fields.hasErrors('destination')}" th:errors="*{destination}"></span>
+    </div>
+    <div>
+        <label>Thời Gian Khởi Hành:</label>
+        <input type="datetime-local" th:field="*{departureTime}" />
+        <span th:if="${#fields.hasErrors('departureTime')}" th:errors="*{departureTime}"></span>
+    </div>
+    <div>
+        <label>Thời Gian Đến:</label>
+        <input type="datetime-local" th:field="*{arrivalTime}" />
+        <span th:if="${#fields.hasErrors('arrivalTime')}" th:errors="*{arrivalTime}"></span>
+    </div>
+    <div>
+        <label>ID Xe:</label>
+        <input type="number" th:field="*{busId}" />
+        <span th:if="${#fields.hasErrors('busId')}" th:errors="*{busId}"></span>
+    </div>
+    <div>
+        <label>Số Ghế Còn Trống:</label>
+        <input type="number" th:field="*{seatsAvailable}" />
+        <span th:if="${#fields.hasErrors('seatsAvailable')}" th:errors="*{seatsAvailable}"></span>
+    </div>
+    <div>
+        <label>URL Hình Ảnh:</label>
+        <input type="text" th:field="*{image}" />
+        <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
+    </div>
+    <button type="submit">Thêm Chuyến Xe</button>
+    <a th:href="@{/admin/trips}">Quay Lại</a>
+</form>
+</body>
+</html>

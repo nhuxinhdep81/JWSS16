@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thêm Xe Mới</title>
+</head>
+<body>
+<h2>Thêm Xe Mới</h2>
+<form th:action="@{/admin/buses/add}" th:object="${bus}" method="post">
+    <div>
+        <label>Biển Số:</label>
+        <input type="text" th:field="*{licensePlate}" />
+        <span th:if="${#fields.hasErrors('licensePlate')}" th:errors="*{licensePlate}"></span>
+    </div>
+    <div>
+        <label>Loại Xe:</label>
+        <select th:field="*{busType}">
+            <option value="NORMAL">NORMAL</option>
+            <option value="VIP">VIP</option>
+            <option value="LUXURY">LUXURY</option>
+        </select>
+        <span th:if="${#fields.hasErrors('busType')}" th:errors="*{busType}"></span>
+    </div>
+    <div>
+        <label>Số Hàng Ghế:</label>
+        <input type="number" th:field="*{rowSeat}" />
+        <span th:if="${#fields.hasErrors('rowSeat')}" th:errors="*{rowSeat}"></span>
+    </div>
+    <div>
+        <label>Số Cột Ghế:</label>
+        <input type="number" th:field="*{colSeat}" />
+        <span th:if="${#fields.hasErrors('colSeat')}" th:errors="*{colSeat}"></span>
+    </div>
+    <div>
+        <label>URL Hình Ảnh:</label>
+        <input type="text" th:field="*{image}" />
+    </div>
+    <button type="submit">Thêm Xe</button>
+    <a th:href="@{/admin/buses}">Quay Lại</a>
+</form>
+</body>
+</html>

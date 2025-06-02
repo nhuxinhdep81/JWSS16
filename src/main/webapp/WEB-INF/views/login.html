@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Đăng Nhập</title>
+</head>
+<body>
+<h2>Đăng Nhập</h2>
+<form th:action="@{/login}" th:object="${user}" method="post">
+  <div>
+    <label>Tên Đăng Nhập:</label>
+    <input type="text" th:field="*{username}"/>
+  </div>
+  <div>
+    <label>Mật Khẩu:</label>
+    <input type="password" th:field="*{password}" />
+  </div>
+  <span th:if="${error}" th:text="${error}" style="color:red;"></span>
+  <br></br>
+  <button type="submit">Đăng Nhập</button>
+</form>
+</body>
+</html>

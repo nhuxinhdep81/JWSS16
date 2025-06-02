@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh Sách Xe</title>
+</head>
+<body>
+<h2>Danh Sách Xe</h2>
+<a th:href="@{/admin/buses/add}">Thêm Xe Mới</a>
+<br>
+<br></br>
+<a th:href="@{/admin/trips}">Quản lý Chuyến Xe</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Biển Số</th>
+        <th>Loại Xe</th>
+        <th>Số Hàng Ghế</th>
+        <th>Số Cột Ghế</th>
+        <th>Tổng Ghế</th>
+        <th>Hình Ảnh</th>
+        <th>Hành Động</th>
+    </tr>
+    <tr th:each="bus : ${buses}">
+        <td th:text="${bus.id}"></td>
+        <td th:text="${bus.licensePlate}"></td>
+        <td th:text="${bus.busType}"></td>
+        <td th:text="${bus.rowSeat}"></td>
+        <td th:text="${bus.colSeat}"></td>
+        <td th:text="${bus.totalSeat}"></td>
+        <td>
+            <img th:src="${bus.image}" width="100" height="100" th:unless="${bus.image == null}"/>
+        </td>
+        <td>
+            <a th:href="@{/admin/buses/edit/{id}(id=${bus.id})}">Sửa</a>
+            <a th:href="@{/admin/buses/delete/{id}(id=${bus.id})}" onclick="return confirm('Bạn có chắc?')">Xóa</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

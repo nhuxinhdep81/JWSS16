@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh Sách Chuyến Xe</title>
+</head>
+<body>
+<h2>Danh Sách Chuyến Xe</h2>
+<a th:href="@{/admin/trips/add}">Thêm Chuyến Xe Mới</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Điểm Khởi Hành</th>
+        <th>Điểm Đến</th>
+        <th>Thời Gian Khởi Hành</th>
+        <th>Thời Gian Đến</th>
+        <th>ID Xe</th>
+        <th>Số Ghế Còn Trống</th>
+        <th>Hình Ảnh</th>
+        <th>Hành Động</th>
+    </tr>
+    <tr th:each="trip : ${trips}">
+        <td th:text="${trip.id}"></td>
+        <td th:text="${trip.departurePoint}"></td>
+        <td th:text="${trip.destination}"></td>
+        <td th:text="${#temporals.format(trip.departureTime, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${#temporals.format(trip.arrivalTime, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${trip.busId}"></td>
+        <td th:text="${trip.seatsAvailable}"></td>
+        <td>
+            <img th:src="${trip.image}" width="100" height="100" th:unless="${trip.image == null}"/>
+        </td>
+        <td>
+            <a th:href="@{/admin/trips/edit/{id}(id=${trip.id})}">Sửa</a>
+            <a th:href="@{/admin/trips/delete/{id}(id=${trip.id})}" onclick="return confirm('Bạn có chắc?')">Xóa</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
